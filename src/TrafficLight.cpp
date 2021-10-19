@@ -6,22 +6,34 @@
 
 /* Implementation of class "MessageQueue" */
 
-/* 
+
 template <typename T>
 T MessageQueue<T>::receive()
 {
     // FP.5a : The method receive should use std::unique_lock<std::mutex> and _condition.wait() 
     // to wait for and receive new messages and pull them from the queue using move semantics. 
     // The received object should then be returned by the receive function. 
+     std::unique_lock<std::mutex> uLock(_mutex);
+        _condition.wait(uLock, [this] { return !_queue.empty(); }); // pass unique lock to condition variable
+
+        // remove last vector element from queue
+        T message = std::move(_queue.back());
+        _queue.pop_back();
+
+        return message; 
 }
 
 template <typename T>
-void MessageQueue<T>::send(T &&msg)
+void MessageQueue<T>::send(T &&message)
 {
     // FP.4a : The method send should use the mechanisms std::lock_guard<std::mutex> 
     // as well as _condition.notify_one() to add a new message to the queue and afterwards send a notification.
+    std::lock_guard<std::mutex> uLock(_mutex);
+    //std::cout << " Message " << message << " has been sent to the queue" << std::endl;
+    _queue.push_back(std::move(message));
+    _condition.notify_one(); // notify client after pushing new Vehicle into vector
 }
-*/
+
 
 /* Implementation of class "TrafficLight" */
 
@@ -36,7 +48,16 @@ void TrafficLight::waitForGreen()
     // FP.5b : add the implementation of the method waitForGreen, in which an infinite while-loop 
     // runs and repeatedly calls the receive function on the message queue. 
     // Once it receives TrafficLightPhase::green, the method returns.
+	while(true) {
+    	if(_queue.receive() == TrafficLightPhase::green) {
+        	return;
+        }
+        // sleep for 10 ms to reduce load on the processor
+        std::this_thread::sleep_for(std::chrono::milliseconds(10));
+    }
+  	return;
 }
+
 
 TrafficLightPhase TrafficLight::getCurrentPhase()
 {
@@ -47,7 +68,7 @@ void TrafficLight::simulate()
 {
     // FP.2b : Finally, the private method „cycleThroughPhases“ should be started in a thread 
     //when the public method „simulate“ is called. To do this, use the thread queue in the base class. 
-    TrafficObject::threads.emplace_back(std::thread(&TrafficLight::cycleThroughPhases, this));
+    threads.emplace_back(std::thread(&TrafficLight::cycleThroughPhases, this));
 }
 
 // virtual function which is executed in a thread
@@ -70,8 +91,6 @@ void TrafficLight::cycleThroughPhases()
     // start time
     t1 = std::chrono::system_clock::now();
 
-    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>( t2 - t1 ).count();
-
     while (true){
         
         //sleep for 1 millisecond
@@ -79,8 +98,7 @@ void TrafficLight::cycleThroughPhases()
 
         // end time
         t2 = std::chrono::high_resolution_clock::now();
-        auto duration = std::chrono::duration_cast<std::chrono::milliseconds>( t2 - t1 ).count();
-    
+            
         // switch lights if time duration larger than the predefined cycle duration
         if ((std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1).count()) >= cycleDuration) {
             if (_currentPhase == red) 
@@ -90,6 +108,7 @@ void TrafficLight::cycleThroughPhases()
 
         // update start time
         t1 = std::chrono::system_clock::now();
+
         }
     }
 }
