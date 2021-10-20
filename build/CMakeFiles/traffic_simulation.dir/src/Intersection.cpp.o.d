@@ -187,4 +187,7 @@ CMakeFiles/traffic_simulation.dir/src/Intersection.cpp.o: \
  /home/alaris/udacity_Cpp_projects/CppND-Concurrent-Traffic-Simulation/src/Street.h \
  /home/alaris/udacity_Cpp_projects/CppND-Concurrent-Traffic-Simulation/src/TrafficObject.h \
  /home/alaris/udacity_Cpp_projects/CppND-Concurrent-Traffic-Simulation/src/Intersection.h \
+ /home/alaris/udacity_Cpp_projects/CppND-Concurrent-Traffic-Simulation/src/TrafficLight.h \
+ /usr/include/c++/7/deque /usr/include/c++/7/bits/stl_deque.h \
+ /usr/include/c++/7/bits/deque.tcc \
  /home/alaris/udacity_Cpp_projects/CppND-Concurrent-Traffic-Simulation/src/Vehicle.h

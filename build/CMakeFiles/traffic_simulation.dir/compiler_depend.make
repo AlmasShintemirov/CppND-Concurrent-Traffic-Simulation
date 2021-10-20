@@ -303,7 +303,11 @@ CMakeFiles/traffic_simulation.dir/src/Graphics.cpp.o: ../src/Graphics.cpp \
   /usr/include/c++/7/future \
   /usr/include/c++/7/condition_variable \
   /usr/include/c++/7/atomic \
-  /usr/include/c++/7/bits/atomic_futex.h
+  /usr/include/c++/7/bits/atomic_futex.h \
+  ../src/TrafficLight.h \
+  /usr/include/c++/7/deque \
+  /usr/include/c++/7/bits/stl_deque.h \
+  /usr/include/c++/7/bits/deque.tcc
 
 CMakeFiles/traffic_simulation.dir/src/Intersection.cpp.o: ../src/Intersection.cpp \
   /usr/include/stdc-predef.h \
@@ -545,6 +549,10 @@ CMakeFiles/traffic_simulation.dir/src/Intersection.cpp.o: ../src/Intersection.cp
   ../src/Street.h \
   ../src/TrafficObject.h \
   ../src/Intersection.h \
+  ../src/TrafficLight.h \
+  /usr/include/c++/7/deque \
+  /usr/include/c++/7/bits/stl_deque.h \
+  /usr/include/c++/7/bits/deque.tcc \
   ../src/Vehicle.h
 
 CMakeFiles/traffic_simulation.dir/src/Street.cpp.o: ../src/Street.cpp \
@@ -756,6 +764,10 @@ CMakeFiles/traffic_simulation.dir/src/Street.cpp.o: ../src/Street.cpp \
   /usr/include/c++/7/atomic \
   /usr/include/c++/7/bits/atomic_futex.h \
   /usr/include/c++/7/bits/std_function.h \
+  ../src/TrafficLight.h \
+  /usr/include/c++/7/deque \
+  /usr/include/c++/7/bits/stl_deque.h \
+  /usr/include/c++/7/bits/deque.tcc \
   ../src/Street.h
 
 CMakeFiles/traffic_simulation.dir/src/TrafficLight.cpp.o: ../src/TrafficLight.cpp \
@@ -1415,6 +1427,10 @@ CMakeFiles/traffic_simulation.dir/src/TrafficSimulator-Final.cpp.o: ../src/Traff
   /usr/include/c++/7/atomic \
   /usr/include/c++/7/bits/atomic_futex.h \
   /usr/include/c++/7/bits/std_function.h \
+  ../src/TrafficLight.h \
+  /usr/include/c++/7/deque \
+  /usr/include/c++/7/bits/stl_deque.h \
+  /usr/include/c++/7/bits/deque.tcc \
   ../src/Graphics.h \
   /usr/local/include/opencv4/opencv2/core.hpp \
   /usr/local/include/opencv4/opencv2/core/cvdef.h \
@@ -1746,6 +1762,10 @@ CMakeFiles/traffic_simulation.dir/src/Vehicle.cpp.o: ../src/Vehicle.cpp \
   /usr/include/c++/7/atomic \
   /usr/include/c++/7/bits/atomic_futex.h \
   /usr/include/c++/7/bits/std_function.h \
+  ../src/TrafficLight.h \
+  /usr/include/c++/7/deque \
+  /usr/include/c++/7/bits/stl_deque.h \
+  /usr/include/c++/7/bits/deque.tcc \
   ../src/Vehicle.h
 
 
@@ -1755,10 +1775,6 @@ CMakeFiles/traffic_simulation.dir/src/Vehicle.cpp.o: ../src/Vehicle.cpp \
 
 ../src/TrafficObject.cpp:
 
-/usr/include/c++/7/bits/deque.tcc:
-
-../src/TrafficLight.h:
-
 ../src/TrafficLight.cpp:
 
 /usr/include/c++/7/bits/stl_numeric.h:
@@ -1766,6 +1782,10 @@ CMakeFiles/traffic_simulation.dir/src/Vehicle.cpp.o: ../src/Vehicle.cpp \
 /usr/include/x86_64-linux-gnu/c++/7/bits/opt_random.h:
 
 ../src/Intersection.cpp:
+
+/usr/include/c++/7/bits/deque.tcc:
+
+../src/TrafficLight.h:
 
 /usr/include/c++/7/numeric:
 

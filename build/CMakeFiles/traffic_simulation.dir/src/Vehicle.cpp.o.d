@@ -188,4 +188,7 @@ CMakeFiles/traffic_simulation.dir/src/Vehicle.cpp.o: \
  /usr/include/c++/7/future /usr/include/c++/7/condition_variable \
  /usr/include/c++/7/atomic /usr/include/c++/7/bits/atomic_futex.h \
  /usr/include/c++/7/bits/std_function.h \
+ /home/alaris/udacity_Cpp_projects/CppND-Concurrent-Traffic-Simulation/src/TrafficLight.h \
+ /usr/include/c++/7/deque /usr/include/c++/7/bits/stl_deque.h \
+ /usr/include/c++/7/bits/deque.tcc \
  /home/alaris/udacity_Cpp_projects/CppND-Concurrent-Traffic-Simulation/src/Vehicle.h

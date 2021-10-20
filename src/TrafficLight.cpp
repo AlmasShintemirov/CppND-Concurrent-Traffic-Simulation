@@ -14,8 +14,7 @@ T MessageQueue<T>::receive()
     // to wait for and receive new messages and pull them from the queue using move semantics. 
     // The received object should then be returned by the receive function. 
      std::unique_lock<std::mutex> uLock(_mutex);
-        _condition.wait(uLock, [this] { return !_queue.empty(); }); // pass unique lock to condition variable
-
+        _condition.wait(uLock); 
         // remove last vector element from queue
         T message = std::move(_queue.back());
         _queue.pop_back();
@@ -29,8 +28,8 @@ void MessageQueue<T>::send(T &&message)
     // FP.4a : The method send should use the mechanisms std::lock_guard<std::mutex> 
     // as well as _condition.notify_one() to add a new message to the queue and afterwards send a notification.
     std::lock_guard<std::mutex> uLock(_mutex);
-    //std::cout << " Message " << message << " has been sent to the queue" << std::endl;
-    _queue.push_back(std::move(message));
+    _queue.clear();  // Source: https://knowledge.udacity.com/questions/98313
+    _queue.push_back(message);
     _condition.notify_one(); // notify client after pushing new Vehicle into vector
 }
 
@@ -41,6 +40,11 @@ void MessageQueue<T>::send(T &&message)
 TrafficLight::TrafficLight()
 {
     _currentPhase = TrafficLightPhase::red;
+}
+
+TrafficLight::~TrafficLight()
+{
+   
 }
 
 void TrafficLight::waitForGreen()
@@ -101,6 +105,7 @@ void TrafficLight::cycleThroughPhases()
             
         // switch lights if time duration larger than the predefined cycle duration
         if ((std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1).count()) >= cycleDuration) {
+           
             if (_currentPhase == red) 
                 _currentPhase = green;
             else 
@@ -108,6 +113,8 @@ void TrafficLight::cycleThroughPhases()
 
         // update start time
         t1 = std::chrono::system_clock::now();
+        
+        _queue.send(std::move(_currentPhase));
 
         }
     }
